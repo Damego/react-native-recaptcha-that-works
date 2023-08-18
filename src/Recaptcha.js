@@ -39,6 +39,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
+  invisibleView: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
   loadingContainer: {
     position: 'absolute',
     top: 0,
@@ -70,7 +77,8 @@ const Recaptcha = forwardRef(
       siteKey,
       baseUrl,
       lang,
-      style,
+      webViewStyle,
+      invisibleViewStyle,
       enterprise,
       recaptchaDomain,
       gstaticDomain,
@@ -193,7 +201,11 @@ const Recaptcha = forwardRef(
       [loading]
     );
 
-    const webViewStyles = useMemo(() => [styles.webView, style], [style]);
+    const webViewStyles = useMemo(() => [styles.webView, webViewStyle], [webViewStyle]);
+    const invisibleViewStyles = useMemo(
+      () => [styles.invisibleView, invisibleViewStyle],
+      [invisibleViewStyle]
+    );
 
     const renderLoading = () => {
       if (!loading && source) {
@@ -224,7 +236,7 @@ const Recaptcha = forwardRef(
     // I don't need modal component for invisible captcha
     if (isInvisibleSize) {
       return (
-        <View>
+        <View style={invisibleViewStyles}>
           {headerComponent}
           {webView}
           {footerComponent}
