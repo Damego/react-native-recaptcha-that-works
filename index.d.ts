@@ -42,7 +42,8 @@ export declare type RecaptchaProps = {
     siteKey: string;
     baseUrl: string;
     lang?: string;
-    style?: StyleProp<ViewStyle>;
+    webViewStyle?: StyleProp<ViewStyle>;
+    invisibleViewStyle?: StyleProp<ViewStyle>;
     enterprise?: boolean;
     recaptchaDomain?: string;
     gstaticDomain?: string;
